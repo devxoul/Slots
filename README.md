@@ -7,6 +7,25 @@ Bucket
 Dynamic contents management for Swift.
 
 
+At a Glance
+-----------
+
+```swift
+let bucket = Bucket()
+bucket.pattern = ["Month", "Picture", "Picture", "Month", "Picture"]
+bucket.contents["Month"] = ["Nov 2014", "Dec 2014", "Jan 2015"]
+bucket.contents["Picture"] = [Picture(1), Picture(2), Picture(3)]
+```
+
+Then:
+
+```swift
+bucket.contents // "Nov 2014", Picture(1), Picture(2), "Dec 2014", Picture(3), "Jan 2015"
+bucket[2] // Picture(2)
+bucket.typeAtIndex(3) // "Month"
+```
+
+
 Installation
 ------------
 
