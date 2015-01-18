@@ -61,10 +61,10 @@ For example, when contents pattern is set to `["alphabet", "number"]`, Bucket wi
 bucket.pattern = ["alphabet", "number"]
 bucket["alphabet"] = ["a", "b", "c"]
 bucket["number"] = [1, 2, 3, 4, 5]
-bucket.contents() // ["a", 1, "b", 2, "c", 3]
+bucket.contents // ["a", 1, "b", 2, "c", 3]
 ```
 
-Although there are 5 objects in `"alphabet"`, but `bucket.contents()` returns array that contains only 3 numbers because there is no more objects in `"alphabet"` after 3 time alternated. You can check the number of elements in sorted contents with `count` property.
+Although there are 5 objects in `"alphabet"`, but `bucket.contents` returns array that contains only 3 numbers because there is no more objects in `"alphabet"` after 3 time alternated. You can check the number of elements in sorted contents with `count` property.
 
 ```swift
 bucket.count // 6
@@ -74,7 +74,7 @@ Same content type can appear more than one time.
 
 ```swift
 bucket.pattern = ["alphabet", "number", "number"]
-bucket.contents() // ["a", 1, 2, "b", 3, 4, "c", 5]
+bucket.contents // ["a", 1, 2, "b", 3, 4, "c", 5]
 ```
 
 
@@ -87,7 +87,7 @@ bucket.pattern = ["alphabet", "number"]
 bucket.repeatables = ["number"] // make repeatable
 bucket["alphabet"] = ["a", "b", "c"]
 bucket["number"] = [1, 2, 3, 4, 5]
-bucket.contents() // ["a", 1, "b", 2, "c", 3, 4, 5]
+bucket.contents // ["a", 1, "b", 2, "c", 3, 4, 5]
 ```
 
 
