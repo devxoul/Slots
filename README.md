@@ -2,6 +2,7 @@ Bucket
 ======
 
 [![Build Status](https://travis-ci.org/devxoul/Bucket.svg)](https://travis-ci.org/devxoul/Bucket)
+[![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyColor.svg?style=flat)](http://cocoapods.org/?q=name%3ABucket%20author%3Adevxoul)
 
 Dynamic contents management for Swift.
 
