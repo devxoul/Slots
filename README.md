@@ -6,6 +6,34 @@ Bucket
 Dynamic contents management for Swift.
 
 
+Installation
+------------
+
+### CocoaPods
+
+**requirements:**
+
+- iOS >= 8.0
+- OS X >= 10.9
+- CocoaPods 0.36.0.beta.1
+
+**Podfile**
+
+```ruby
+pod 'Bucket', '0.1.0'
+```
+
+
+### Git Submodule
+
+```shell
+git submodule add https://github.com/devxoul/Bucket.git
+git submodule update --remote
+```
+
+Then add source code files from Bucket directory into your Xcode project.
+
+
 Getting Started
 ---------------
 
