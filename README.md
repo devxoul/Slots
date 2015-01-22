@@ -34,7 +34,7 @@ Installation
 **Podfile**
 
 ```ruby
-pod 'Slots', '0.1.0'
+pod 'Slots'
 ```
 
 
