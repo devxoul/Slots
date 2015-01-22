@@ -190,3 +190,9 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
     }
 }
 ```
+
+
+License
+-------
+
+Slots is under MIT license. See the LICENSE file for more information.
