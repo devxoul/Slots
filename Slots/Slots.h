@@ -1,6 +1,3 @@
-//
-// Bucket
-//
 // The MIT License (MIT)
 //
 // Copyright (c) 2015 Suyeol Jeon (xoul.kr)
@@ -23,12 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-//! Project version number for Bucket.
-FOUNDATION_EXPORT double BucketVersionNumber;
+//! Project version number for Slots.
+FOUNDATION_EXPORT double SlotsVersionNumber;
 
-//! Project version string for Bucket.
-FOUNDATION_EXPORT const unsigned char BucketVersionString[];
+//! Project version string for Slots.
+FOUNDATION_EXPORT const unsigned char SlotsVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <Bucket/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <Slots/PublicHeader.h>
+
+

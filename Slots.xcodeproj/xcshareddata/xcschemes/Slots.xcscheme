@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "03C8C59D1A6B9A8D0010C2F5"
-               BuildableName = "Bucket.framework"
-               BlueprintName = "Bucket"
-               ReferencedContainer = "container:Bucket.xcodeproj">
+               BlueprintIdentifier = "030749691A71495300455C92"
+               BuildableName = "Slots.framework"
+               BlueprintName = "Slots"
+               ReferencedContainer = "container:Slots.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "03C8C5A81A6B9A8D0010C2F5"
-               BuildableName = "BucketTests.xctest"
-               BlueprintName = "BucketTests"
-               ReferencedContainer = "container:Bucket.xcodeproj">
+               BlueprintIdentifier = "030749741A71495300455C92"
+               BuildableName = "SlotsTests.xctest"
+               BlueprintName = "SlotsTests"
+               ReferencedContainer = "container:Slots.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,20 +46,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "03C8C5A81A6B9A8D0010C2F5"
-               BuildableName = "BucketTests.xctest"
-               BlueprintName = "BucketTests"
-               ReferencedContainer = "container:Bucket.xcodeproj">
+               BlueprintIdentifier = "030749741A71495300455C92"
+               BuildableName = "SlotsTests.xctest"
+               BlueprintName = "SlotsTests"
+               ReferencedContainer = "container:Slots.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "03C8C59D1A6B9A8D0010C2F5"
-            BuildableName = "Bucket.framework"
-            BlueprintName = "Bucket"
-            ReferencedContainer = "container:Bucket.xcodeproj">
+            BlueprintIdentifier = "030749691A71495300455C92"
+            BuildableName = "Slots.framework"
+            BlueprintName = "Slots"
+            ReferencedContainer = "container:Slots.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -75,10 +75,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "03C8C59D1A6B9A8D0010C2F5"
-            BuildableName = "Bucket.framework"
-            BlueprintName = "Bucket"
-            ReferencedContainer = "container:Bucket.xcodeproj">
+            BlueprintIdentifier = "030749691A71495300455C92"
+            BuildableName = "Slots.framework"
+            BlueprintName = "Slots"
+            ReferencedContainer = "container:Slots.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -93,10 +93,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "03C8C59D1A6B9A8D0010C2F5"
-            BuildableName = "Bucket.framework"
-            BlueprintName = "Bucket"
-            ReferencedContainer = "container:Bucket.xcodeproj">
+            BlueprintIdentifier = "030749691A71495300455C92"
+            BuildableName = "Slots.framework"
+            BlueprintName = "Slots"
+            ReferencedContainer = "container:Slots.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

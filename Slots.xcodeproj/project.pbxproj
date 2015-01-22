@@ -7,31 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03C8C5A41A6B9A8D0010C2F5 /* Bucket.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C8C5A31A6B9A8D0010C2F5 /* Bucket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		03C8C5B11A6B9A8D0010C2F5 /* BucketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8C5B01A6B9A8D0010C2F5 /* BucketTests.swift */; };
-		03C8C5BB1A6B9ACD0010C2F5 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8C5BA1A6B9ACD0010C2F5 /* Bucket.swift */; };
-		03C8C5BE1A6B9F1C0010C2F5 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8C5BA1A6B9ACD0010C2F5 /* Bucket.swift */; };
+		030749701A71495300455C92 /* Slots.h in Headers */ = {isa = PBXBuildFile; fileRef = 0307496F1A71495300455C92 /* Slots.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		030749871A7149A400455C92 /* Slots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030749861A7149A400455C92 /* Slots.swift */; };
+		030749881A7149AD00455C92 /* Slots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030749861A7149A400455C92 /* Slots.swift */; };
+		0307498B1A714AF000455C92 /* SlotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030749891A714A8C00455C92 /* SlotsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03C8C59E1A6B9A8D0010C2F5 /* Bucket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bucket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		03C8C5A21A6B9A8D0010C2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03C8C5A31A6B9A8D0010C2F5 /* Bucket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bucket.h; sourceTree = "<group>"; };
-		03C8C5A91A6B9A8D0010C2F5 /* BucketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BucketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03C8C5AF1A6B9A8D0010C2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03C8C5B01A6B9A8D0010C2F5 /* BucketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketTests.swift; sourceTree = "<group>"; };
-		03C8C5BA1A6B9ACD0010C2F5 /* Bucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
+		0307496A1A71495300455C92 /* Slots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Slots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0307496E1A71495300455C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0307496F1A71495300455C92 /* Slots.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Slots.h; sourceTree = "<group>"; };
+		030749751A71495300455C92 /* SlotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0307497B1A71495300455C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		030749861A7149A400455C92 /* Slots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slots.swift; sourceTree = "<group>"; };
+		030749891A714A8C00455C92 /* SlotsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		03C8C59A1A6B9A8D0010C2F5 /* Frameworks */ = {
+		030749661A71495300455C92 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03C8C5A61A6B9A8D0010C2F5 /* Frameworks */ = {
+		030749721A71495300455C92 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,55 +41,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03C8C5941A6B9A8D0010C2F5 = {
+		030749601A71495300455C92 = {
 			isa = PBXGroup;
 			children = (
-				03C8C5A01A6B9A8D0010C2F5 /* Bucket */,
-				03C8C5AD1A6B9A8D0010C2F5 /* BucketTests */,
-				03C8C59F1A6B9A8D0010C2F5 /* Products */,
+				0307496C1A71495300455C92 /* Slots */,
+				030749791A71495300455C92 /* SlotsTests */,
+				0307496B1A71495300455C92 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		03C8C59F1A6B9A8D0010C2F5 /* Products */ = {
+		0307496B1A71495300455C92 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03C8C59E1A6B9A8D0010C2F5 /* Bucket.framework */,
-				03C8C5A91A6B9A8D0010C2F5 /* BucketTests.xctest */,
+				0307496A1A71495300455C92 /* Slots.framework */,
+				030749751A71495300455C92 /* SlotsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		03C8C5A01A6B9A8D0010C2F5 /* Bucket */ = {
+		0307496C1A71495300455C92 /* Slots */ = {
 			isa = PBXGroup;
 			children = (
-				03C8C5A31A6B9A8D0010C2F5 /* Bucket.h */,
-				03C8C5BA1A6B9ACD0010C2F5 /* Bucket.swift */,
-				03C8C5A11A6B9A8D0010C2F5 /* Supporting Files */,
+				0307496F1A71495300455C92 /* Slots.h */,
+				030749861A7149A400455C92 /* Slots.swift */,
+				0307496D1A71495300455C92 /* Supporting Files */,
 			);
-			path = Bucket;
+			path = Slots;
 			sourceTree = "<group>";
 		};
-		03C8C5A11A6B9A8D0010C2F5 /* Supporting Files */ = {
+		0307496D1A71495300455C92 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				03C8C5A21A6B9A8D0010C2F5 /* Info.plist */,
+				0307496E1A71495300455C92 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		03C8C5AD1A6B9A8D0010C2F5 /* BucketTests */ = {
+		030749791A71495300455C92 /* SlotsTests */ = {
 			isa = PBXGroup;
 			children = (
-				03C8C5B01A6B9A8D0010C2F5 /* BucketTests.swift */,
-				03C8C5AE1A6B9A8D0010C2F5 /* Supporting Files */,
+				030749891A714A8C00455C92 /* SlotsTests.swift */,
+				0307497A1A71495300455C92 /* Supporting Files */,
 			);
-			path = BucketTests;
+			path = SlotsTests;
 			sourceTree = "<group>";
 		};
-		03C8C5AE1A6B9A8D0010C2F5 /* Supporting Files */ = {
+		0307497A1A71495300455C92 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				03C8C5AF1A6B9A8D0010C2F5 /* Info.plist */,
+				0307497B1A71495300455C92 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -97,96 +97,96 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		03C8C59B1A6B9A8D0010C2F5 /* Headers */ = {
+		030749671A71495300455C92 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C8C5A41A6B9A8D0010C2F5 /* Bucket.h in Headers */,
+				030749701A71495300455C92 /* Slots.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		03C8C59D1A6B9A8D0010C2F5 /* Bucket */ = {
+		030749691A71495300455C92 /* Slots */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03C8C5B41A6B9A8D0010C2F5 /* Build configuration list for PBXNativeTarget "Bucket" */;
+			buildConfigurationList = 030749801A71495300455C92 /* Build configuration list for PBXNativeTarget "Slots" */;
 			buildPhases = (
-				03C8C5991A6B9A8D0010C2F5 /* Sources */,
-				03C8C59A1A6B9A8D0010C2F5 /* Frameworks */,
-				03C8C59B1A6B9A8D0010C2F5 /* Headers */,
-				03C8C59C1A6B9A8D0010C2F5 /* Resources */,
+				030749651A71495300455C92 /* Sources */,
+				030749661A71495300455C92 /* Frameworks */,
+				030749671A71495300455C92 /* Headers */,
+				030749681A71495300455C92 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Bucket;
-			productName = Bucket;
-			productReference = 03C8C59E1A6B9A8D0010C2F5 /* Bucket.framework */;
+			name = Slots;
+			productName = Slots;
+			productReference = 0307496A1A71495300455C92 /* Slots.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		03C8C5A81A6B9A8D0010C2F5 /* BucketTests */ = {
+		030749741A71495300455C92 /* SlotsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03C8C5B71A6B9A8D0010C2F5 /* Build configuration list for PBXNativeTarget "BucketTests" */;
+			buildConfigurationList = 030749831A71495300455C92 /* Build configuration list for PBXNativeTarget "SlotsTests" */;
 			buildPhases = (
-				03C8C5A51A6B9A8D0010C2F5 /* Sources */,
-				03C8C5A61A6B9A8D0010C2F5 /* Frameworks */,
-				03C8C5A71A6B9A8D0010C2F5 /* Resources */,
+				030749711A71495300455C92 /* Sources */,
+				030749721A71495300455C92 /* Frameworks */,
+				030749731A71495300455C92 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BucketTests;
-			productName = BucketTests;
-			productReference = 03C8C5A91A6B9A8D0010C2F5 /* BucketTests.xctest */;
+			name = SlotsTests;
+			productName = SlotsTests;
+			productReference = 030749751A71495300455C92 /* SlotsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		03C8C5951A6B9A8D0010C2F5 /* Project object */ = {
+		030749611A71495300455C92 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Suyeol Jeon";
 				TargetAttributes = {
-					03C8C59D1A6B9A8D0010C2F5 = {
+					030749691A71495300455C92 = {
 						CreatedOnToolsVersion = 6.2;
 					};
-					03C8C5A81A6B9A8D0010C2F5 = {
+					030749741A71495300455C92 = {
 						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
-			buildConfigurationList = 03C8C5981A6B9A8D0010C2F5 /* Build configuration list for PBXProject "Bucket" */;
+			buildConfigurationList = 030749641A71495300455C92 /* Build configuration list for PBXProject "Slots" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 03C8C5941A6B9A8D0010C2F5;
-			productRefGroup = 03C8C59F1A6B9A8D0010C2F5 /* Products */;
+			mainGroup = 030749601A71495300455C92;
+			productRefGroup = 0307496B1A71495300455C92 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03C8C59D1A6B9A8D0010C2F5 /* Bucket */,
-				03C8C5A81A6B9A8D0010C2F5 /* BucketTests */,
+				030749691A71495300455C92 /* Slots */,
+				030749741A71495300455C92 /* SlotsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		03C8C59C1A6B9A8D0010C2F5 /* Resources */ = {
+		030749681A71495300455C92 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03C8C5A71A6B9A8D0010C2F5 /* Resources */ = {
+		030749731A71495300455C92 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -196,27 +196,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		03C8C5991A6B9A8D0010C2F5 /* Sources */ = {
+		030749651A71495300455C92 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C8C5BB1A6B9ACD0010C2F5 /* Bucket.swift in Sources */,
+				030749871A7149A400455C92 /* Slots.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03C8C5A51A6B9A8D0010C2F5 /* Sources */ = {
+		030749711A71495300455C92 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C8C5BE1A6B9F1C0010C2F5 /* Bucket.swift in Sources */,
-				03C8C5B11A6B9A8D0010C2F5 /* BucketTests.swift in Sources */,
+				030749881A7149AD00455C92 /* Slots.swift in Sources */,
+				0307498B1A714AF000455C92 /* SlotsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		03C8C5B21A6B9A8D0010C2F5 /* Debug */ = {
+		0307497E1A71495300455C92 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -262,7 +262,7 @@
 			};
 			name = Debug;
 		};
-		03C8C5B31A6B9A8D0010C2F5 /* Release */ = {
+		0307497F1A71495300455C92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,7 +301,7 @@
 			};
 			name = Release;
 		};
-		03C8C5B51A6B9A8D0010C2F5 /* Debug */ = {
+		030749811A71495300455C92 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -309,7 +309,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Bucket/Info.plist;
+				INFOPLIST_FILE = Slots/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -318,7 +318,7 @@
 			};
 			name = Debug;
 		};
-		03C8C5B61A6B9A8D0010C2F5 /* Release */ = {
+		030749821A71495300455C92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -326,7 +326,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Bucket/Info.plist;
+				INFOPLIST_FILE = Slots/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -334,7 +334,7 @@
 			};
 			name = Release;
 		};
-		03C8C5B81A6B9A8D0010C2F5 /* Debug */ = {
+		030749841A71495300455C92 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -345,20 +345,20 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = BucketTests/Info.plist;
+				INFOPLIST_FILE = SlotsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		03C8C5B91A6B9A8D0010C2F5 /* Release */ = {
+		030749851A71495300455C92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = BucketTests/Info.plist;
+				INFOPLIST_FILE = SlotsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -367,34 +367,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		03C8C5981A6B9A8D0010C2F5 /* Build configuration list for PBXProject "Bucket" */ = {
+		030749641A71495300455C92 /* Build configuration list for PBXProject "Slots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				03C8C5B21A6B9A8D0010C2F5 /* Debug */,
-				03C8C5B31A6B9A8D0010C2F5 /* Release */,
+				0307497E1A71495300455C92 /* Debug */,
+				0307497F1A71495300455C92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03C8C5B41A6B9A8D0010C2F5 /* Build configuration list for PBXNativeTarget "Bucket" */ = {
+		030749801A71495300455C92 /* Build configuration list for PBXNativeTarget "Slots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				03C8C5B51A6B9A8D0010C2F5 /* Debug */,
-				03C8C5B61A6B9A8D0010C2F5 /* Release */,
+				030749811A71495300455C92 /* Debug */,
+				030749821A71495300455C92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03C8C5B71A6B9A8D0010C2F5 /* Build configuration list for PBXNativeTarget "BucketTests" */ = {
+		030749831A71495300455C92 /* Build configuration list for PBXNativeTarget "SlotsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				03C8C5B81A6B9A8D0010C2F5 /* Debug */,
-				03C8C5B91A6B9A8D0010C2F5 /* Release */,
+				030749841A71495300455C92 /* Debug */,
+				030749851A71495300455C92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 03C8C5951A6B9A8D0010C2F5 /* Project object */;
+	rootObject = 030749611A71495300455C92 /* Project object */;
 }

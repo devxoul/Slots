@@ -1,6 +1,3 @@
-//
-// Bucket
-//
 // The MIT License (MIT)
 //
 // Copyright (c) 2015 Suyeol Jeon (xoul.kr)
@@ -25,7 +22,7 @@
 
 import Foundation
 
-public class Bucket: NSObject {
+public class Slots: NSObject {
 
     public var header: [String]? { didSet { self.setNeedsSort() } }
     public var pattern: [String]! { didSet { self.setNeedsSort() } }
