@@ -47,6 +47,16 @@ public class Slots: NSObject {
         return self._contents.count
     }
 
+    /// if set to `true`, subscript will return empty array(`[]`) instead of `nil` for undefined content types. Default
+    /// value is `false`.
+    ///
+    /// Example::
+    ///
+    ///   slots["undefined"] // nil
+    ///   slots.prefersEmptyArrayForUndefinedContentTypes = true
+    ///   slots["undefined"] // []
+    public var prefersEmptyArrayForUndefinedContentTypes = false
+
 
     // MARK: - Init
 
@@ -98,7 +108,11 @@ public class Slots: NSObject {
 
     public subscript(type: String) -> [AnyObject]? {
         get {
-            return self._contentsForType[type]
+            let contents = self._contentsForType[type]
+            if self.prefersEmptyArrayForUndefinedContentTypes {
+                return contents ?? []
+            }
+            return contents
         }
         set {
             self._contentsForType[type] = newValue

@@ -181,4 +181,13 @@ class SlotsTests: XCTestCase {
         XCTAssert(self.slots.typeAtIndex(6) == nil)
     }
 
+    func testUndefinedContentType() {
+        XCTAssert(self.slots["undefined"] == nil)
+    }
+
+    func testPrefersEmptyArrayForUndefinedContentTypes() {
+        self.slots.prefersEmptyArrayForUndefinedContentTypes = true
+        XCTAssert(self.slots["undefined"] != nil)
+    }
+
 }
