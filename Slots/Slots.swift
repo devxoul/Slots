@@ -101,7 +101,7 @@ public class Slots: NSObject {
         return self._contents[index]
     }
 
-    public subscript(subRange: Range<Int>) -> Slice<AnyObject> {
+    public subscript(subRange: Range<Int>) -> ArraySlice<AnyObject> {
         self.sortIfNeeded()
         return self._contents[subRange]
     }
