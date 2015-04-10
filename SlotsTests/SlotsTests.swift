@@ -67,7 +67,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3]
         expected = [2, 4, 1, 6, 8, 3]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as Int, expected[i])
+            XCTAssertEqual(self.slots[i] as! Int, expected[i])
         }
         XCTAssertNil(self.slots[6])
 
@@ -77,7 +77,7 @@ class SlotsTests: XCTestCase {
         self.slots["mod-2"] = [2, 5, 8]
         expected = [0, 1, 2, 3]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as Int, expected[i])
+            XCTAssertEqual(self.slots[i] as! Int, expected[i])
         }
 
         self.slots.pattern = ["mod-0", "mod-1", "mod-1", "mod-2"]
@@ -86,7 +86,7 @@ class SlotsTests: XCTestCase {
         self.slots["mod-2"] = [2, 5, 8]
         expected = [0, 1, 4, 2, 3, 7, 10, 5, 6, 13]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as Int, expected[i])
+            XCTAssertEqual(self.slots[i] as! Int, expected[i])
         }
     }
 
@@ -96,7 +96,7 @@ class SlotsTests: XCTestCase {
         self.slots["even"] = [2, 4, 6, 8, 10, 12, 14, 16]
         self.slots["odd"] = [1, 3]
         XCTAssertEqual(self.slots.count, 8)
-        XCTAssertEqual(self.slots.contents as [Int], [2, 4, 1, 6, 8, 3, 10, 12])
+        XCTAssertEqual(self.slots.contents as! [Int], [2, 4, 1, 6, 8, 3, 10, 12])
 
         self.slots.pattern = ["even", "even", "odd"]
         self.slots.repeatables = ["even"]
@@ -124,8 +124,8 @@ class SlotsTests: XCTestCase {
         let odds = [1, 3, 5]
         self.slots["even"] = evens
         self.slots["odd"] = odds
-        XCTAssertEqual(evens, self.slots["even"] as [Int])
-        XCTAssertEqual(odds, self.slots["odd"] as [Int])
+        XCTAssertEqual(evens, self.slots["even"] as! [Int])
+        XCTAssertEqual(odds, self.slots["odd"] as! [Int])
     }
 
     func testHeader() {
@@ -135,7 +135,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3, 5]
         let expected = [2, 4, 6, 8, 1, 10, 3, 12, 5, 14]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as Int, expected[i])
+            XCTAssertEqual(self.slots[i] as! Int, expected[i])
         }
     }
 
@@ -146,7 +146,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3, 5]
         let expected = [2, 1, 4, 3, 6, 5, 8]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as Int, expected[i])
+            XCTAssertEqual(self.slots[i] as! Int, expected[i])
         }
     }
 

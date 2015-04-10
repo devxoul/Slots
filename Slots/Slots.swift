@@ -101,7 +101,7 @@ public class Slots: NSObject {
         return self._contents[index]
     }
 
-    public subscript(subRange: Range<Int>) -> Slice<AnyObject> {
+    public subscript(subRange: Range<Int>) -> ArraySlice<AnyObject> {
         self.sortIfNeeded()
         return self._contents[subRange]
     }
@@ -146,12 +146,12 @@ public class Slots: NSObject {
             stacks[type] = reverse(contents)
         }
 
-        var repeatableTypes = NSMutableSet()
+        var repeatableTypes = Set<String>()
         if let repeatables = self.repeatables {
-            repeatableTypes.intersectSet(NSSet(array: self.pattern))
+            repeatableTypes.intersect(Set(self.pattern))
             for type in self.pattern {
                 if contains(repeatables, type) {
-                    repeatableTypes.addObject(type)
+                    repeatableTypes.insert(type)
                 }
             }
         }
@@ -159,9 +159,9 @@ public class Slots: NSObject {
         let enumerate = { (from: [String]) -> Bool in
             var nonRepeatableFinished = false
             for type in from {
-                if stacks[type]? == nil || stacks[type]!.count == 0 {
-                    if repeatableTypes.containsObject(type) {
-                        repeatableTypes.removeObject(type)
+                if stacks[type] == nil || stacks[type]!.count == 0 {
+                    if repeatableTypes.contains(type) {
+                        repeatableTypes.remove(type)
                     } else {
                         nonRepeatableFinished = true
                     }
@@ -171,7 +171,7 @@ public class Slots: NSObject {
                     continue
                 }
 
-                if !nonRepeatableFinished || repeatableTypes.containsObject(type) {
+                if !nonRepeatableFinished || repeatableTypes.contains(type) {
                     let last: AnyObject = stacks[type]!.removeLast()
                     self._patterns.append(type)
                     self._contents.append(last)
