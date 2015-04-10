@@ -159,7 +159,7 @@ public class Slots: NSObject {
         let enumerate = { (from: [String]) -> Bool in
             var nonRepeatableFinished = false
             for type in from {
-                if stacks[type]? == nil || stacks[type]!.count == 0 {
+                if stacks[type] == nil || stacks[type]!.count == 0 {
                     if repeatableTypes.contains(type) {
                         repeatableTypes.remove(type)
                     } else {
