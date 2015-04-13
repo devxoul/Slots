@@ -22,7 +22,7 @@
 
 import Foundation
 
-public class Slots: NSObject {
+public class Slots {
 
     public var header: [String]? { didSet { self.setNeedsSort() } }
     public var pattern: [String]! { didSet { self.setNeedsSort() } }
@@ -60,8 +60,7 @@ public class Slots: NSObject {
 
     // MARK: - Init
 
-    public override init() {
-        super.init()
+    public init() {
         self.pattern = []
         self._patterns = []
         self._contentsForType = [String: [AnyObject]]()
