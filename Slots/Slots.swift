@@ -28,6 +28,15 @@ public class Slots {
     public var pattern: [String]! { didSet { self.setNeedsSort() } }
     public var repeatables: [String]? { didSet { self.setNeedsSort() } }
 
+    /// Fix content type in specific position. The pattern already exists in `pattern` would be ignored.
+    ///
+    /// Example::
+    ///   slots.fixed = [
+    ///     0: "SomeContentType",
+    ///     3: "SomeContentType",
+    ///   ]
+    public var fixed: [Int: String]? { didSet { self.setNeedsSort() } }
+
     private var _patterns: [String]!
 
     private var _contentsForType: [String: [AnyObject]]!
@@ -188,6 +197,23 @@ public class Slots {
         while true {
             if enumerate(self.pattern) {
                 break
+            }
+        }
+
+        if let fixed = self.fixed {
+            for index in sorted(fixed.keys) {
+                let type = fixed[index]!
+
+                // ignore if the type already exists in `pattern`
+                if contains(self.pattern, type) {
+                    continue
+                }
+
+                if let content: AnyObject = stacks[type]?.last {
+                    stacks[type]?.removeLast()
+                    self._patterns.insert(type, atIndex: index)
+                    self._contents.insert(content, atIndex: index)
+                }
             }
         }
     }

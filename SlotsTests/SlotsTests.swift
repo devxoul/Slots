@@ -190,4 +190,64 @@ class SlotsTests: XCTestCase {
         XCTAssert(self.slots["undefined"] != nil)
     }
 
+    func testFixedPosition() {
+        self.slots.pattern = ["odd", "even"];
+        self.slots.fixed = [
+            0: "string",
+            3: "string",
+            4: "string",
+        ]
+        self.slots["odd"] = [1, 3, 5, 7, 9]
+        self.slots["even"] = [2, 4, 6, 8, 10]
+        self.slots["string"] = ["a", "b", "c", "d", "e"]
+        XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2, "b", "c", 3, 4, 5, 6, 7, 8, 9, 10])
+    }
+
+    func testFixedPositionManyTypes() {
+        self.slots.pattern = ["odd", "even"];
+        self.slots.fixed = [
+            0: "string",
+            3: "greeting",
+            4: "compliment",
+            9: "string",
+        ]
+        self.slots["odd"] = [1, 3, 5, 7, 9]
+        self.slots["even"] = [2, 4, 6, 8, 10]
+        self.slots["string"] = ["a", "b", "c", "d", "e"]
+        self.slots["greeting"] = ["hi", "hello", "nice to meet you"]
+        self.slots["compliment"] = ["nice", "great", "good job"]
+        XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2, "hi", "nice", 3, 4, 5, 6, "b", 7, 8, 9, 10])
+    }
+
+    func testFixedPositionTypeAtIndex() {
+        self.slots.pattern = ["odd", "even"];
+        self.slots.fixed = [
+            0: "string",
+            3: "greeting",
+            4: "compliment",
+            9: "string",
+        ]
+        self.slots["odd"] = [1, 3, 5, 7, 9]
+        self.slots["even"] = [2, 4, 6, 8, 10]
+        self.slots["string"] = ["a", "b", "c", "d", "e"]
+        self.slots["greeting"] = ["hi", "hello", "nice to meet you"]
+        self.slots["compliment"] = ["nice", "great", "good job"]
+        XCTAssertEqual(self.slots.typeAtIndex(0)!, "string")
+        XCTAssertEqual(self.slots.typeAtIndex(3)!, "greeting")
+        XCTAssertEqual(self.slots.typeAtIndex(4)!, "compliment")
+        XCTAssertEqual(self.slots.typeAtIndex(9)!, "string")
+    }
+
+    func testFixedPositionIgnoreSameTypeInPattern() {
+        self.slots.pattern = ["odd", "even"];
+        self.slots.fixed = [
+            0: "odd",
+            3: "odd",
+            7: "odd",
+        ]
+        self.slots["odd"] = [1, 3, 5, 7, 9]
+        self.slots["even"] = [2, 4, 6, 8, 10]
+        XCTAssertEqual(self.slots.contents as! [Int], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    }
+
 }
