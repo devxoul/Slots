@@ -209,7 +209,7 @@ public class Slots {
                     continue
                 }
 
-                if let content: AnyObject = stacks[type]?.last {
+                if let content: AnyObject = stacks[type]?.last where contains(0...self._patterns.count, index) {
                     stacks[type]?.removeLast()
                     self._patterns.insert(type, atIndex: index)
                     self._contents.insert(content, atIndex: index)

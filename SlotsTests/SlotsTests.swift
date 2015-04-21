@@ -203,6 +203,18 @@ class SlotsTests: XCTestCase {
         XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2, "b", "c", 3, 4, 5, 6, 7, 8, 9, 10])
     }
 
+    func testFixedPositionRangeOverflow() {
+        self.slots.pattern = ["odd", "even"];
+        self.slots.fixed = [
+            0: "string",
+            5: "string", // 5 is bigger than `contents.count` - won't be included
+        ]
+        self.slots["odd"] = [1]
+        self.slots["even"] = [2]
+        self.slots["string"] = ["a", "b", "c", "d", "e"]
+        XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2])
+    }
+
     func testFixedPositionManyTypes() {
         self.slots.pattern = ["odd", "even"];
         self.slots.fixed = [
