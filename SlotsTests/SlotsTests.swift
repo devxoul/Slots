@@ -262,4 +262,18 @@ class SlotsTests: XCTestCase {
         XCTAssertEqual(self.slots.contents as! [Int], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     }
 
+    func testDefaultValue() {
+        self.slots.pattern = map("SSASSSSRSS") { String($0) }
+        self.slots.defaultContentType = "S"
+        self.slots["S"] = [String](count: 45, repeatedValue: "S")
+        self.slots["A"] = [String](count: 3, repeatedValue: "A")
+        self.slots["R"] = [String](count: 2, repeatedValue: "R")
+
+        let comparison = map("SSASSSSRSSSSASSSSRSSSSASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS") { String($0) }
+        println(self.slots.count)
+        for i in 0..<self.slots.count {
+            XCTAssertEqual(self.slots[i] as! String, comparison[i])
+        }
+    }
+
 }
