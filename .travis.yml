@@ -1,4 +1,4 @@
 language: objective-c
-osx_image: xcode611
+osx_image: xcode6.4
 script:
     - xctool -scheme 'Slots' -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test
