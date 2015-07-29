@@ -179,7 +179,7 @@ public class Slots {
                     // if `defaultContentType` exists, use it.
                     if let defaultType = self.defaultContentType,
                        var stack = stacks[defaultType] where stack.count > 0 {
-                        let last: AnyObject = stack.removeLast()
+                        let last: AnyObject = stacks[defaultType]!.removeLast()
                         self._patterns.append(defaultType)
                         self._contents.append(last)
                     }
