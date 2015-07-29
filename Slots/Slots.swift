@@ -28,6 +28,10 @@ public class Slots {
     public var pattern: [String]! { didSet { self.setNeedsSort() } }
     public var repeatables: [String]? { didSet { self.setNeedsSort() } }
 
+    /// If content type is invalid or exhausted, Slots uses `defaultContentType` instead. `repeatables` will be ignored
+    /// if `defaultContentType` is set.
+    public var defaultContentType: String? { didSet { self.setNeedsSort() } }
+
     /// Fix content type in specific position. The pattern already exists in `pattern` would be ignored.
     ///
     /// Example::
@@ -155,7 +159,9 @@ public class Slots {
         }
 
         var repeatableTypes = Set<String>()
-        if let repeatables = self.repeatables {
+
+        // if `defaultContentType` is set, `repeatables` will be ignored.
+        if let repeatables = self.repeatables where self.defaultContentType == nil {
             repeatableTypes.intersect(Set(self.pattern))
             for type in self.pattern {
                 if contains(repeatables, type) {
@@ -167,14 +173,27 @@ public class Slots {
         let enumerate = { (from: [String]) -> Bool in
             var nonRepeatableFinished = false
             for type in from {
+                // no more data in stack
                 if stacks[type] == nil || stacks[type]!.count == 0 {
-                    if repeatableTypes.contains(type) {
-                        repeatableTypes.remove(type)
-                    } else {
-                        nonRepeatableFinished = true
+
+                    // if `defaultContentType` exists, use it.
+                    if let defaultType = self.defaultContentType,
+                       var stack = stacks[defaultType] where stack.count > 0 {
+                        let last: AnyObject = stack.removeLast()
+                        self._patterns.append(defaultType)
+                        self._contents.append(last)
                     }
-                    if repeatableTypes.count == 0 {
-                        return true
+
+                    // if `type` is repeatable, remove it from repeatables.
+                    else {
+                        if repeatableTypes.contains(type) {
+                            repeatableTypes.remove(type)
+                        } else {
+                            nonRepeatableFinished = true
+                        }
+                        if repeatableTypes.count == 0 {
+                            return true
+                        }
                     }
                     continue
                 }
