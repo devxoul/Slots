@@ -1,6 +1,7 @@
 Slots
 =====
 
+![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
 [![Build Status](https://travis-ci.org/devxoul/Slots.svg)](https://travis-ci.org/devxoul/Slots)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Slots.svg?style=flat)](http://cocoapods.org/?q=name%3ASlots%20author%3Adevxoul)
 
