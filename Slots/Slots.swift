@@ -155,16 +155,16 @@ public class Slots {
 
         var stacks = [String: [AnyObject]]()
         for (type, contents) in self._contentsForType {
-            stacks[type] = reverse(contents)
+            stacks[type] = contents.reverse()
         }
 
         var repeatableTypes = Set<String>()
 
         // if `defaultContentType` is set, `repeatables` will be ignored.
         if let repeatables = self.repeatables where self.defaultContentType == nil {
-            repeatableTypes.intersect(Set(self.pattern))
+            repeatableTypes.intersectInPlace(Set(self.pattern))
             for type in self.pattern {
-                if contains(repeatables, type) {
+                if repeatables.contains(type) {
                     repeatableTypes.insert(type)
                 }
             }
@@ -178,7 +178,7 @@ public class Slots {
 
                     // if `defaultContentType` exists, use it.
                     if let defaultType = self.defaultContentType,
-                       var stack = stacks[defaultType] where stack.count > 0 {
+                       let stack = stacks[defaultType] where stack.count > 0 {
                         let last: AnyObject = stacks[defaultType]!.removeLast()
                         self._patterns.append(defaultType)
                         self._contents.append(last)
@@ -220,15 +220,15 @@ public class Slots {
         }
 
         if let fixed = self.fixed {
-            for index in sorted(fixed.keys) {
+            for index in fixed.keys.sort() {
                 let type = fixed[index]!
 
                 // ignore if the type already exists in `pattern`
-                if contains(self.pattern, type) {
+                if self.pattern.contains(type) {
                     continue
                 }
 
-                if let content: AnyObject = stacks[type]?.last where contains(0...self._patterns.count, index) {
+                if let content: AnyObject = stacks[type]?.last where (0...self._patterns.count).contains(index) {
                     stacks[type]?.removeLast()
                     self._patterns.insert(type, atIndex: index)
                     self._contents.insert(content, atIndex: index)

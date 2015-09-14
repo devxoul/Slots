@@ -67,7 +67,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3]
         expected = [2, 4, 1, 6, 8, 3]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as! Int, expected[i])
+            XCTAssertEqual(self.slots[i] as? Int, expected[i])
         }
         XCTAssertNil(self.slots[6])
 
@@ -77,7 +77,7 @@ class SlotsTests: XCTestCase {
         self.slots["mod-2"] = [2, 5, 8]
         expected = [0, 1, 2, 3]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as! Int, expected[i])
+            XCTAssertEqual(self.slots[i] as? Int, expected[i])
         }
 
         self.slots.pattern = ["mod-0", "mod-1", "mod-1", "mod-2"]
@@ -86,7 +86,7 @@ class SlotsTests: XCTestCase {
         self.slots["mod-2"] = [2, 5, 8]
         expected = [0, 1, 4, 2, 3, 7, 10, 5, 6, 13]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as! Int, expected[i])
+            XCTAssertEqual(self.slots[i] as? Int, expected[i])
         }
     }
 
@@ -135,7 +135,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3, 5]
         let expected = [2, 4, 6, 8, 1, 10, 3, 12, 5, 14]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as! Int, expected[i])
+            XCTAssertEqual(self.slots[i] as? Int, expected[i])
         }
     }
 
@@ -146,7 +146,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3, 5]
         let expected = [2, 1, 4, 3, 6, 5, 8]
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as! Int, expected[i])
+            XCTAssertEqual(self.slots[i] as? Int, expected[i])
         }
     }
 
@@ -263,28 +263,27 @@ class SlotsTests: XCTestCase {
     }
 
     func testDefaultValue() {
-        self.slots.pattern = map("SSASSSSRSS") { String($0) }
+        self.slots.pattern = "SSASSSSRSS".characters.map { String($0) }
         self.slots.defaultContentType = "S"
         self.slots["S"] = [String](count: 45, repeatedValue: "S")
         self.slots["A"] = [String](count: 3, repeatedValue: "A")
         self.slots["R"] = [String](count: 2, repeatedValue: "R")
 
-        let comparison = map("SSASSSSRSSSSASSSSRSSSSASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS") { String($0) }
+        let comparison = "SSASSSSRSSSSASSSSRSSSSASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS".characters.map { String($0) }
         for i in 0..<self.slots.count {
-            XCTAssertEqual(self.slots[i] as! String, comparison[i])
+            XCTAssertEqual(self.slots[i] as? String, comparison[i])
         }
     }
 
     func testDefaultValueWithUniqueData() {
         self.slots.pattern =
-        map("SSASSSSRSSSSASSSSRSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSS") {
-            String($0)
-        }
+            "SSASSSSRSSSSASSSSRSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSSSSASSSSSSS"
+                .characters.map { String($0) }
         self.slots.defaultContentType = "S"
 
-        self.slots["S"] = map(1...40) { "S\($0)" }
-        self.slots["A"] = map(1...3) { "A\($0)" }
-        self.slots["R"] = map(1...2) { "R\($0)" }
+        self.slots["S"] = (1...40).map { "S\($0)" }
+        self.slots["A"] = (1...3).map { "A\($0)" }
+        self.slots["R"] = (1...2).map { "R\($0)" }
 
         XCTAssertEqual(self.slots.count, Set<String>(self.slots.contents as! [String]).count)
     }
