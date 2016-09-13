@@ -22,15 +22,15 @@
 
 import Foundation
 
-public class Slots {
+open class Slots {
 
-    public var header: [String]? { didSet { self.setNeedsSort() } }
-    public var pattern: [String]! { didSet { self.setNeedsSort() } }
-    public var repeatables: [String]? { didSet { self.setNeedsSort() } }
+    open var header: [String]? { didSet { self.setNeedsSort() } }
+    open var pattern: [String]! { didSet { self.setNeedsSort() } }
+    open var repeatables: [String]? { didSet { self.setNeedsSort() } }
 
     /// If content type is invalid or exhausted, Slots uses `defaultContentType` instead. `repeatables` will be ignored
     /// if `defaultContentType` is set.
-    public var defaultContentType: String? { didSet { self.setNeedsSort() } }
+    open var defaultContentType: String? { didSet { self.setNeedsSort() } }
 
     /// Fix content type in specific position. The pattern already exists in `pattern` would be ignored.
     ///
@@ -39,23 +39,20 @@ public class Slots {
     ///     0: "SomeContentType",
     ///     3: "SomeContentType",
     ///   ]
-    public var fixed: [Int: String]? { didSet { self.setNeedsSort() } }
+    open var fixed: [Int: String]? { didSet { self.setNeedsSort() } }
 
     private var _patterns: [String]!
 
-    private var _contentsForType: [String: [AnyObject]]!
-    private var _contents: [AnyObject]!
-    public var contents: [AnyObject] {
+    private var _contentsForType: [String: [Any]]!
+    private var _contents: [Any]!
+    open var contents: [Any] {
         self.sortIfNeeded()
         return self._contents
     }
 
-    private var _needsSort: Bool = false
-    public var needsSort: Bool {
-        return self._needsSort
-    }
+    private(set) open var needsSort: Bool = false
 
-    public var count: Int {
+    open var count: Int {
         self.sortIfNeeded()
         return self._contents.count
     }
@@ -68,7 +65,7 @@ public class Slots {
     ///   slots["undefined"] // nil
     ///   slots.prefersEmptyArrayForUndefinedContentTypes = true
     ///   slots["undefined"] // []
-    public var prefersEmptyArrayForUndefinedContentTypes = false
+    open var prefersEmptyArrayForUndefinedContentTypes = false
 
 
     // MARK: - Init
@@ -76,7 +73,7 @@ public class Slots {
     public init() {
         self.pattern = []
         self._patterns = []
-        self._contentsForType = [String: [AnyObject]]()
+        self._contentsForType = [String: [Any]]()
         self._contents = []
     }
 
@@ -88,7 +85,7 @@ public class Slots {
 
     // MARK: - Type At Index
 
-    public func typeAtIndex(index: Int) -> String? {
+    open func type(at index: Int) -> String? {
         if index < 0 {
             return nil
         }
@@ -102,7 +99,7 @@ public class Slots {
 
     // MARK: - Subscripts
 
-    public subscript(index: Int) -> AnyObject? {
+    open subscript(index: Int) -> Any? {
         if index < 0 {
             return nil
         }
@@ -113,12 +110,12 @@ public class Slots {
         return self._contents[index]
     }
 
-    public subscript(subRange: Range<Int>) -> ArraySlice<AnyObject> {
+    open subscript(subRange: Range<Int>) -> ArraySlice<Any> {
         self.sortIfNeeded()
         return self._contents[subRange]
     }
 
-    public subscript(type: String) -> [AnyObject]? {
+    open subscript(type: String) -> [Any]? {
         get {
             let contents = self._contentsForType[type]
             if self.prefersEmptyArrayForUndefinedContentTypes {
@@ -135,34 +132,34 @@ public class Slots {
 
     // MARK: - Sort
 
-    public func setNeedsSort() {
-        self._needsSort = true
+    open func setNeedsSort() {
+        self.needsSort = true
     }
 
-    public func sortIfNeeded() {
+    open func sortIfNeeded() {
         if self.needsSort {
             self.sort()
         }
     }
 
-    public func sort() {
-        self._needsSort = false
+    open func sort() {
+        self.needsSort = false
         self._patterns.removeAll()
         self._contents.removeAll()
         if self.pattern.count == 0 || self._contentsForType.count == 0 {
             return
         }
 
-        var stacks = [String: [AnyObject]]()
+        var stacks = [String: [Any]]()
         for (type, contents) in self._contentsForType {
-            stacks[type] = contents.reverse()
+            stacks[type] = contents.reversed()
         }
 
         var repeatableTypes = Set<String>()
 
         // if `defaultContentType` is set, `repeatables` will be ignored.
-        if let repeatables = self.repeatables where self.defaultContentType == nil {
-            repeatableTypes.intersectInPlace(Set(self.pattern))
+        if let repeatables = self.repeatables , self.defaultContentType == nil {
+            repeatableTypes.formIntersection(Set(self.pattern))
             for type in self.pattern {
                 if repeatables.contains(type) {
                     repeatableTypes.insert(type)
@@ -178,8 +175,8 @@ public class Slots {
 
                     // if `defaultContentType` exists, use it.
                     if let defaultType = self.defaultContentType,
-                       let stack = stacks[defaultType] where stack.count > 0 {
-                        let last: AnyObject = stacks[defaultType]!.removeLast()
+                       let stack = stacks[defaultType] , stack.count > 0 {
+                        let last: Any = stacks[defaultType]!.removeLast()
                         self._patterns.append(defaultType)
                         self._contents.append(last)
                     }
@@ -199,7 +196,7 @@ public class Slots {
                 }
 
                 if !nonRepeatableFinished || repeatableTypes.contains(type) {
-                    let last: AnyObject = stacks[type]!.removeLast()
+                    let last: Any = stacks[type]!.removeLast()
                     self._patterns.append(type)
                     self._contents.append(last)
                 }
@@ -220,7 +217,7 @@ public class Slots {
         }
 
         if let fixed = self.fixed {
-            for index in fixed.keys.sort() {
+            for index in fixed.keys.sorted() {
                 let type = fixed[index]!
 
                 // ignore if the type already exists in `pattern`
@@ -228,10 +225,10 @@ public class Slots {
                     continue
                 }
 
-                if let content: AnyObject = stacks[type]?.last where (0...self._patterns.count).contains(index) {
+                if let content: Any = stacks[type]?.last , (0...self._patterns.count).contains(index) {
                     stacks[type]?.removeLast()
-                    self._patterns.insert(type, atIndex: index)
-                    self._contents.insert(content, atIndex: index)
+                    self._patterns.insert(type, at: index)
+                    self._contents.insert(content, at: index)
                 }
             }
         }

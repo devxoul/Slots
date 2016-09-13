@@ -22,6 +22,8 @@
 
 import XCTest
 
+import Slots
+
 class SlotsTests: XCTestCase {
 
     var slots: Slots!
@@ -122,8 +124,8 @@ class SlotsTests: XCTestCase {
     func testSubscriptionKey() {
         let evens = [2, 4, 6, 8]
         let odds = [1, 3, 5]
-        self.slots["even"] = evens
-        self.slots["odd"] = odds
+        self.slots["even"] = evens as [Any]?
+        self.slots["odd"] = odds as [Any]?
         XCTAssertEqual(evens, self.slots["even"] as! [Int])
         XCTAssertEqual(odds, self.slots["odd"] as! [Int])
     }
@@ -200,7 +202,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1, 3, 5, 7, 9]
         self.slots["even"] = [2, 4, 6, 8, 10]
         self.slots["string"] = ["a", "b", "c", "d", "e"]
-        XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2, "b", "c", 3, 4, 5, 6, 7, 8, 9, 10])
+        XCTAssert(self.slots.contents == ["a", 1, 2, "b", "c", 3, 4, 5, 6, 7, 8, 9, 10])
     }
 
     func testFixedPositionRangeOverflow() {
@@ -212,7 +214,7 @@ class SlotsTests: XCTestCase {
         self.slots["odd"] = [1]
         self.slots["even"] = [2]
         self.slots["string"] = ["a", "b", "c", "d", "e"]
-        XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2])
+        XCTAssert(self.slots.contents == ["a", 1, 2])
     }
 
     func testFixedPositionManyTypes() {
@@ -228,7 +230,7 @@ class SlotsTests: XCTestCase {
         self.slots["string"] = ["a", "b", "c", "d", "e"]
         self.slots["greeting"] = ["hi", "hello", "nice to meet you"]
         self.slots["compliment"] = ["nice", "great", "good job"]
-        XCTAssertEqual(self.slots.contents as! [NSObject], ["a", 1, 2, "hi", "nice", 3, 4, 5, 6, "b", 7, 8, 9, 10])
+        XCTAssert(self.slots.contents == ["a", 1, 2, "hi", "nice", 3, 4, 5, 6, "b", 7, 8, 9, 10])
     }
 
     func testFixedPositionTypeAtIndex() {
@@ -265,9 +267,9 @@ class SlotsTests: XCTestCase {
     func testDefaultValue() {
         self.slots.pattern = "SSASSSSRSS".characters.map { String($0) }
         self.slots.defaultContentType = "S"
-        self.slots["S"] = [String](count: 45, repeatedValue: "S")
-        self.slots["A"] = [String](count: 3, repeatedValue: "A")
-        self.slots["R"] = [String](count: 2, repeatedValue: "R")
+        self.slots["S"] = [String](repeating: "S", count: 45) as [Any]?
+        self.slots["A"] = [String](repeating: "A", count: 3) as [Any]?
+        self.slots["R"] = [String](repeating: "R", count: 2) as [Any]?
 
         let comparison = "SSASSSSRSSSSASSSSRSSSSASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS".characters.map { String($0) }
         for i in 0..<self.slots.count {
@@ -288,4 +290,12 @@ class SlotsTests: XCTestCase {
         XCTAssertEqual(self.slots.count, Set<String>(self.slots.contents as! [String]).count)
     }
 
+}
+
+func == (lhs: [Any], rhs: [Any]) -> Bool {
+  guard lhs.count == rhs.count else { return false }
+  for (left, right) in zip(lhs, rhs) {
+    guard "\(left)" == "\(right)" else { return false }
+  }
+  return true
 }
