@@ -39,13 +39,13 @@ Installation
 - **For iOS 8+ projects** with [Carthage](https://github.com/Carthage/Carthage):
 
     ```
-    github "devxoul/Slots" ~> 1.3
+    github "devxoul/Slots" ~> 2.0
     ```
 
 - **For iOS 7 projects** with [CocoaSeeds](https://github.com/devxoul/CocoaSeeds):
 
     ```ruby
-    github 'devxoul/Then', '1.3.0', :files => 'Slots/*.swift'
+    github 'devxoul/Then', '2.0.0', :files => 'Slots/*.swift'
     ```
 
 

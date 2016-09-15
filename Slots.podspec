@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Slots'
-  s.version          = '1.3.0'
+  s.version          = '2.0.0'
   s.summary          = 'Dynamic contents management for Swift.'
   s.homepage         = 'https://github.com/devxoul/Slots'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
