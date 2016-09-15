@@ -1,7 +1,7 @@
 Slots
 =====
 
-![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 [![Build Status](https://travis-ci.org/devxoul/Slots.svg)](https://travis-ci.org/devxoul/Slots)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Slots.svg?style=flat)](http://cocoapods.org/?q=name%3ASlots%20author%3Adevxoul)
 
@@ -23,30 +23,30 @@ Then:
 ```swift
 slots.contents // "Nov 2014", Picture(1), Picture(2), "Dec 2014", Picture(3), "Jan 2015"
 slots[2] // Picture(2)
-slots.typeAtIndex(3) // "Month"
+slots.type(at: 3) // "Month"
 ```
 
 
 Installation
 ------------
 
-### CocoaPods
+- **For iOS 8+ projects** with [CocoaPods](https://cocoapods.org):
 
-**Podfile**
+    ```ruby
+    pod 'Slots'
+    ```
 
-```ruby
-pod 'Slots'
-```
+- **For iOS 8+ projects** with [Carthage](https://github.com/Carthage/Carthage):
 
+    ```
+    github "devxoul/Slots" ~> 1.3
+    ```
 
-### Git Submodule
+- **For iOS 7 projects** with [CocoaSeeds](https://github.com/devxoul/CocoaSeeds):
 
-```shell
-$ git submodule add https://github.com/devxoul/Slots.git
-$ git submodule update --remote
-```
-
-Then add source code files from Slots directory into your Xcode project.
+    ```ruby
+    github 'devxoul/Then', '1.3.0', :files => 'Slots/*.swift'
+    ```
 
 
 Getting Started
@@ -143,8 +143,8 @@ Let's apply Slots to real world situation. Assume that we have to make a newsfee
 ```swift
 // declare content types as constant
 struct ContentType {
-    static let Style = "Style"
-    static let Advertisement = "Advertisement"
+    static let style = "style"
+    static let advertisement = "advertisement"
 }
 
 func viewDidLoad() {
@@ -152,39 +152,39 @@ func viewDidLoad() {
 
     // each advertisements appear after 3 styles
     self.slots.pattern = [
-        ContentType.Style, ContentType.Style, ContentType.Style
-        ContentType.Advertisement
+        ContentType.style, ContentType.style, ContentType.style
+        ContentType.advertisement
     ]
     
     // styles must be repeated even if there's no advertisements.
-    self.slots.repeatables = [ContentType.Style]
+    self.slots.repeatables = [ContentType.style]
 }
 
 func fetchStyles() {
-    self.slots[ContentType.Style] = // styles from API response
+    self.slots[ContentType.style] = // styles from API response
     self.tableView.reloadData()
 }
 
 func fetchAdvertisements() {
-    self.slots[ContentType.Advertisement] = // advertisements from API response
+    self.slots[ContentType.advertisement] = // advertisements from API response
     self.tableView.reloadData()
 }
 
-func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.slots.count
 }
 
-func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let contentType = self.slots.typeAtIndex(indexPath.row)
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
+    let contentType = self.slots.type(at: indexPath.row)
     let content = self.slots[indexPath.row]
     
     switch contentType {
-        case ContentType.Style:
+        case ContentType.style:
             let cell = // ...
             cell.style = content as Style
             return cell
 
-        case ContentType.Advertisement:
+        case ContentType.advertisement:
             let cell = // ...
             cell.advertisement = content as Advertisement
             return cell
@@ -196,4 +196,4 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
 License
 -------
 
-Slots is under MIT license. See the LICENSE file for more information.
+Slots is under MIT license. See the [LICENSE](LICENSE) file for more information.
