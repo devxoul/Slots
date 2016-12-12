@@ -20,218 +20,106 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+/// A protocol which defines a slot type.
+public protocol SlotType: Hashable {
+  associatedtype Item
+}
 
-open class Slots {
+public struct Slots<T: SlotType>: Sequence {
+  public typealias Slot = T
+  public typealias Item = T.Item
 
-    open var header: [String]? { didSet { self.setNeedsSort() } }
-    open var pattern: [String]! { didSet { self.setNeedsSort() } }
-    open var repeatables: [String]? { didSet { self.setNeedsSort() } }
+  public var headers: [Slot]?
+  public var patterns: [Slot]?
 
-    /// If content type is invalid or exhausted, Slots uses `defaultContentType` instead. `repeatables` will be ignored
-    /// if `defaultContentType` is set.
-    open var defaultContentType: String? { didSet { self.setNeedsSort() } }
+  /// This slot will be used after `headers` and `patterns` are exhausted.
+  public var pleaceholder: Slot?
 
-    /// Fix content type in specific position. The pattern already exists in `pattern` would be ignored.
-    ///
-    /// Example::
-    ///   slots.fixed = [
-    ///     0: "SomeContentType",
-    ///     3: "SomeContentType",
-    ///   ]
-    open var fixed: [Int: String]? { didSet { self.setNeedsSort() } }
+  /// Fixes slot in specific position.
+  ///
+  ///   slots.fixtures = [
+  ///     0: MySlot.banner,
+  ///     3: MySlot.news,
+  ///   ]
+  public var fixtures: [Int: Slot]?
 
-    private var _patterns: [String]!
+  /// Returns all slots items which is set from subscript.
+  private var allSlotItems: [Slot: [Item]] = [:]
 
-    private var _contentsForType: [String: [Any]]!
-    private var _contents: [Any]!
-    open var contents: [Any] {
-        self.sortIfNeeded()
-        return self._contents
+  /// Returns a stack which represents non-yet-generated slot items.
+  fileprivate var slotItemStack: [Slot: [Item]] = [:]
+
+  /// Returns a generated items.
+  fileprivate var generatedItems: [Item] = []
+
+  /// Returns a number of generated headers.
+  fileprivate var generatedHeadersCount: Int = 0
+
+  /// Returns a number of generated fixtures.
+  fileprivate var generatedFixturesCount: Int = 0
+
+  /// This indicates that the non-placeholder items are exhausted. If `true`, `next()` will
+  /// generate from `placeholder`.
+  fileprivate var isNonplaceholderExhausted: Bool = false
+
+  public init(patterns: [Slot]? = nil) {
+    self.patterns = patterns
+  }
+
+  public subscript(slot: Slot) -> [Item]? {
+    get {
+      return self.allSlotItems[slot]
+    }
+    set {
+      self.allSlotItems[slot] = newValue
+      self.slotItemStack[slot] = newValue
+    }
+  }
+}
+
+extension Slots: IteratorProtocol {
+  public mutating func next() -> Item? {
+    // fixtures
+    let nextFixtureIndex = self.generatedItems.count
+    if let slot = self.fixtures?[nextFixtureIndex], let item = self.next(for: slot) {
+      self.generatedFixturesCount += 1
+      return item
     }
 
-    private(set) open var needsSort: Bool = false
-
-    open var count: Int {
-        self.sortIfNeeded()
-        return self._contents.count
+    // headers
+    let nextHeaderIndex = nextFixtureIndex - self.generatedFixturesCount
+    if !self.isNonplaceholderExhausted,
+      let item = self.next(at: nextHeaderIndex, from: self.headers) {
+      self.generatedHeadersCount += 1
+      return item
     }
 
-    /// if set to `true`, subscript will return empty array(`[]`) instead of `nil` for undefined content types. Default
-    /// value is `false`.
-    ///
-    /// Example::
-    ///
-    ///   slots["undefined"] // nil
-    ///   slots.prefersEmptyArrayForUndefinedContentTypes = true
-    ///   slots["undefined"] // []
-    open var prefersEmptyArrayForUndefinedContentTypes = false
-
-
-    // MARK: - Init
-
-    public init() {
-        self.pattern = []
-        self._patterns = []
-        self._contentsForType = [String: [Any]]()
-        self._contents = []
+    // patterns
+    let nextPatternIndex = nextHeaderIndex - self.generatedHeadersCount
+    if !self.isNonplaceholderExhausted,
+      let item = self.next(at: nextPatternIndex, from: self.patterns) {
+      return item
     }
 
-    public convenience init(pattern: [String]) {
-        self.init()
-        self.pattern = pattern
+    // placeholder
+    self.isNonplaceholderExhausted = true
+    if let placeholder = self.pleaceholder, let item = self.next(for: placeholder) {
+      return item
     }
 
+    return nil
+  }
 
-    // MARK: - Type At Index
+  private mutating func next(at index: Int, from slots: [Slot]?) -> Item? {
+    guard let slots = slots, !slots.isEmpty else { return nil }
+    guard slots.indices.contains(index % slots.count) else { return nil }
+    return self.next(for: slots[index % slots.count])
+  }
 
-    open func type(at index: Int) -> String? {
-        if index < 0 {
-            return nil
-        }
-        self.sortIfNeeded()
-        if index >= self._patterns.count {
-            return nil
-        }
-        return self._patterns[index]
-    }
-
-
-    // MARK: - Subscripts
-
-    open subscript(index: Int) -> Any? {
-        if index < 0 {
-            return nil
-        }
-        self.sortIfNeeded()
-        if index >= self._contents.count {
-            return nil
-        }
-        return self._contents[index]
-    }
-
-    open subscript(subRange: Range<Int>) -> ArraySlice<Any> {
-        self.sortIfNeeded()
-        return self._contents[subRange]
-    }
-
-    open subscript(type: String) -> [Any]? {
-        get {
-            let contents = self._contentsForType[type]
-            if self.prefersEmptyArrayForUndefinedContentTypes {
-                return contents ?? []
-            }
-            return contents
-        }
-        set {
-            self._contentsForType[type] = newValue
-            self.setNeedsSort()
-        }
-    }
-
-
-    // MARK: - Sort
-
-    open func setNeedsSort() {
-        self.needsSort = true
-    }
-
-    open func sortIfNeeded() {
-        if self.needsSort {
-            self.sort()
-        }
-    }
-
-    open func sort() {
-        self.needsSort = false
-        self._patterns.removeAll()
-        self._contents.removeAll()
-        if self.pattern.count == 0 || self._contentsForType.count == 0 {
-            return
-        }
-
-        var stacks = [String: [Any]]()
-        for (type, contents) in self._contentsForType {
-            stacks[type] = contents.reversed()
-        }
-
-        var repeatableTypes = Set<String>()
-
-        // if `defaultContentType` is set, `repeatables` will be ignored.
-        if let repeatables = self.repeatables , self.defaultContentType == nil {
-            repeatableTypes.formIntersection(Set(self.pattern))
-            for type in self.pattern {
-                if repeatables.contains(type) {
-                    repeatableTypes.insert(type)
-                }
-            }
-        }
-
-        let enumerate = { (from: [String]) -> Bool in
-            var nonRepeatableFinished = false
-            for type in from {
-                // no more data in stack
-                if stacks[type] == nil || stacks[type]!.count == 0 {
-
-                    // if `defaultContentType` exists, use it.
-                    if let defaultType = self.defaultContentType,
-                       let stack = stacks[defaultType] , stack.count > 0 {
-                        let last: Any = stacks[defaultType]!.removeLast()
-                        self._patterns.append(defaultType)
-                        self._contents.append(last)
-                    }
-
-                    // if `type` is repeatable, remove it from repeatables.
-                    else {
-                        if repeatableTypes.contains(type) {
-                            repeatableTypes.remove(type)
-                        } else {
-                            nonRepeatableFinished = true
-                        }
-                        if repeatableTypes.count == 0 {
-                            return true
-                        }
-                    }
-                    continue
-                }
-
-                if !nonRepeatableFinished || repeatableTypes.contains(type) {
-                    let last: Any = stacks[type]!.removeLast()
-                    self._patterns.append(type)
-                    self._contents.append(last)
-                }
-            }
-            return false
-        }
-
-        if let header = self.header {
-            if enumerate(header) {
-                return
-            }
-        }
-
-        while true {
-            if enumerate(self.pattern) {
-                break
-            }
-        }
-
-        if let fixed = self.fixed {
-            for index in fixed.keys.sorted() {
-                let type = fixed[index]!
-
-                // ignore if the type already exists in `pattern`
-                if self.pattern.contains(type) {
-                    continue
-                }
-
-                if let content: Any = stacks[type]?.last , (0...self._patterns.count).contains(index) {
-                    stacks[type]?.removeLast()
-                    self._patterns.insert(type, at: index)
-                    self._contents.insert(content, at: index)
-                }
-            }
-        }
-    }
-
+  private mutating func next(for slot: Slot) -> Item? {
+    guard let items = self.slotItemStack[slot], let item = items.first else { return nil }
+    self.slotItemStack[slot] = Array(items.dropFirst())
+    self.generatedItems.append(item)
+    return item
+  }
 }
